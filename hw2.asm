@@ -139,10 +139,73 @@ memcpy:
 insert_car:
 ################save s registers
 
-	li $v0, -200
-	li $v1, -200
+	addiu $sp, $sp, -12
+	sw $s0, 0($sp)
+	sw $s1,4($sp)
+	sw $s2, 8($sp)
 
-################save s registers
+	bltz $a1, ic_err
+	bltz $a3, ic_err
+	bgt $a3, $a1 ic_err
+	li $s0, 0x10
+	move $s2, $a1 #len
+	move $s1, $a3 #ind
+
+
+	mul $a1, $s0, $s2 #len * 0x1 = new final
+	addu $a1, $a1, $a0 #add to base addr to get new dest
+	sub $a0, $a1, $s0 #subtract 0x1 to get src
+
+	loop_ic:
+
+
+	addiu $sp, $sp, -32
+	sw $a0, 0($sp)
+	sw $a1, 4($sp)
+	sw $a2, 8($sp)
+	sw $a3, 12($sp)
+	sw $s0, 16($sp)
+	sw $s1, 20($sp)
+	sw $s2, 20($sp)
+	sw $ra, 24($sp)
+	li $a2, 0x10
+	jal memcpy
+	lw $a0, 0($sp)
+	lw $a1, 4($sp)
+	lw $a2, 8($sp)
+	lw $a3, 12($sp)
+	lw $s0, 16($sp)
+	lw $s1, 20($sp)
+	lw $s2, 20($sp)
+	lw $ra, 24($sp)
+	addiu $sp, $sp, 32
+
+	beq $s2, $s1, loop_ic_over #ind = previously moved ind
+	addiu $s2, $s2, -1 #len
+
+	addiu $a1, $a1, -0x10 #dest
+	addiu $a0, $a0, -0x10 #src
+	b loop_ic
+	loop_ic_over:
+######insert_car
+	move $a1, $a0
+	move $a0, $a2
+	addiu $sp, $sp, -4
+	sw $ra, 0($sp)
+	li $a2, 0x10
+	jal memcpy
+	lw $ra, 0($sp)
+	addiu $sp, $sp, 4
+
+	li $v0, 0
+	b ic_over
+	ic_err:
+	li $v0, -1
+	ic_over:
+	lw $s0, 0($sp)
+	lw $s1,4($sp)
+	lw $s2, 8($sp)
+	addiu $sp, $sp, 12
 
 	jr $ra
 

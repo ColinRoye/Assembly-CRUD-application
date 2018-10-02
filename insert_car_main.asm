@@ -71,7 +71,7 @@ syscall
 la $a0, all_cars
 li $a1, 6 
 la $a2, test_car 
-li $a3, 3 
+li $a3, 6 
 jal insert_car
 move $a0, $v0
 li $v0, 1
