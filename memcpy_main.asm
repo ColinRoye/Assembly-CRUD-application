@@ -3,7 +3,7 @@
 .data
 nl: .asciiz "\n"
 memcpy_output: .asciiz "memcpy output: "
-src: .asciiz "ABCD"
+src: .asciiz "ABCDE"
 dest: .asciiz "**********"
 
 .text
@@ -14,7 +14,7 @@ li $v0, 4
 syscall
 la $a0, src
 la $a1, dest
-li $a2, 4
+li $a2, 1
 jal memcpy
 move $a0, $v0
 li $v0, 1

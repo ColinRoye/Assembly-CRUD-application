@@ -52,6 +52,10 @@ index_of_car:
 
 ### Part II ###
 strcmp:
+	addiu $sp, $sp, -8
+	sw $s0, 0($sp)
+	sw $s1, 4($sp)
+
 	lbu $s0, 0($a0)
 	lbu $s1, 0($a1)
 
@@ -98,78 +102,124 @@ strcmp:
 	li $v0, 0
 	strcmp_over:
 
+	lw $s1, 4($sp)
+	lw $s0, 0($sp)
+	addiu $sp, $sp, 8
 	jr $ra
 
 
 ### Part III ###
 memcpy:
-	li $v0, -200
-	li $v1, -200
+	addiu $sp, $sp, -4
+	sw $s0, 0($sp)
+	blez $a2, memcpy_err
+	li $s0, 0
+	loop_memcpy:
+	beq $s0, $a2 loop_memcpy_over
 
+	lbu $t1, 0($a0)
+	sb $t1, 0($a1)
+
+	addiu $s0, $s0, 1
+	addiu $a0, $a0, 1
+	addiu $a1, $a1, 1
+	b loop_memcpy
+	loop_memcpy_over:
+	li $v0, 0
+	b memcpy_over
+	memcpy_err:
+	li $v0, -1
+	memcpy_over:
+	lw $s0, 0($sp)
+	addiu $sp, $sp, 4
 	jr $ra
 
 
 ### Part IV ###
 insert_car:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
 
+################save s registers
 
 	jr $ra
 
 
 ### Part V ###
 most_damaged:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
+	################save s registers
 
 	jr $ra
 
 
 ### Part VI ###
 sort:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
+	################save s registers
 
 	jr $ra
 
 
 ### Part VII ###
 most_popular_feature:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
+################save s registers
 
 	jr $ra
 
 
 ### Optional function: not required for the assignment ###
 transliterate:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
+	################save s registers
 
 	jr $ra
 
 
 ### Optional function: not required for the assignment ###
 char_at:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
+	################save s registers
 
 	jr $ra
 
 
 ### Optional function: not required for the assignment ###
 index_of:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
+	################save s registers
 
 	jr $ra
 
 
 ### Part VIII ###
 compute_check_digit:
+################save s registers
+
 	li $v0, -200
 	li $v1, -200
+	################save s registers
 
 	jr $ra
 
