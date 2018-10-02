@@ -13,9 +13,40 @@
 
 ### Part I ###
 index_of_car:
-	li $v0, -200
-	li $v1, -200
+	addiu $sp, $sp, -4
+	sw $s0, 0($sp)
+	#for i less then num cars
+	#save registers
 
+	li $t0, 0x10
+	mul $a2, $a2, $t0
+
+	addu $a0, $a0, $a2
+
+	li $s0, 0 #iterator
+	loop_ioc:
+	beq $s0, $a1, ioc_not_found #branch if equal length
+
+	lh $s1, 12($a0)
+
+	beq $s1, $a3, ioc_found
+
+	addiu $a0, $a0, 0x10
+	addiu $s0, $s0, 1
+
+
+	b loop_ioc
+	ioc_found:
+	move $v0, $s0
+
+	b ioc_finished
+	ioc_not_found:
+	li $v0, -1
+
+
+	ioc_finished:
+	lw $s0, 0($sp)
+	addiu $sp, $sp, -4
 	jr $ra
 
 
@@ -98,6 +129,8 @@ compute_check_digit:
 	li $v1, -200
 
 	jr $ra
+
+	.include "./part_1/test.asm"
 
 #####################################################################
 ############### DO NOT CREATE A .data SECTION! ######################
