@@ -52,8 +52,51 @@ index_of_car:
 
 ### Part II ###
 strcmp:
-	li $v0, -200
-	li $v1, -200
+	lbu $s0, 0($a0)
+	lbu $s1, 0($a1)
+
+	sub $t0, $s0, $s1
+	beqz $t0, loop_p2
+
+	li $t0, 1
+	move $t1, $s0
+	beqz $s0, len_p2
+	li $t0, -1
+	move $t1, $s1
+	beqz $s1, len_p2
+
+
+	loop_p2:
+	bne $s0, $s1, str_ne_p2
+	beqz $s0, str_eq_p2
+
+
+	addiu $a0, $a0, 1
+	addiu $a1, $a1, 1
+	lbu $s0, 0($a0)
+	lbu $s1, 0($a1)
+	b loop_p2
+
+	len_p2:
+	li $t3, 0 #count
+	loop_len_p2:
+	lbu $t4, 0($t1)
+	bnez $t4, loop_len_p2_over
+	add $t3, $t3, $t0
+	addiu $t1, $t1, 1
+	b loop_len_p2
+
+	loop_len_p2_over:
+	move $v0, $t1
+	b strcmp_over
+
+	str_ne_p2:
+	sub $v0, $s0, $s1
+	b	strcmp_over
+
+	str_eq_p2:
+	li $v0, 0
+	strcmp_over:
 
 	jr $ra
 
