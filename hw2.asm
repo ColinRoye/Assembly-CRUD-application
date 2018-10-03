@@ -212,11 +212,68 @@ insert_car:
 
 ### Part V ###
 most_damaged:
-################save s registers
+################save s registers s0,s1
+	li $s0, 0 #iterator
+	li $s1, 0 #greatest rpc
+	li $s3, 0 # address of most expesive car
 
-	li $v0, -200
-	li $v1, -200
+	loop_repairs:
+	beq $s0, $a3 loop_repairs_over
+	lh $s2, 8($a1)
+
+	ble $s2, $s1, loop_repairs_cont
+	move $s1, $s2
+	lw $s3, 0($a1)
+
+	loop_repairs_cont:
+	addiu $a1, $a1, 12
+	addiu $s0, $s0, 1
+	b loop_repairs
+	loop_repairs_over:
+
+	li $s0, 0
+	#load vin
+	lw $s2, 0($s3)
+	loop_cars:
+	bgt $s0, $a2, md_err
+	lw $s3, 0($a0)
+
+
+
+	addiu $sp, $sp, -20
+	sw $a0, 0($sp)
+	sw $a1, 4($sp)
+	sw $s1, 8($sp)
+	sw $s2, 12($sp)
+	sw $s3, 16($sp)
+	sw $ra, 20($sp)
+	move $a0, $s3
+	move $a1, $s2
+	jal strcmp
+	lw $a0, 0($sp)
+	lw $a1, 4($sp)
+	lw $s1, 8($sp)
+	lw $s2, 12($sp)
+	lw $s3, 16($sp)
+	lw $ra, 20($sp)
+	addiu $sp, $sp, 20
+
+	beqz $v0, loop_cars_over
+
+	addiu $s0, $s0, 1
+	addiu $a0, $a0 0x10
+	b loop_cars
+	loop_cars_over:
+	move $v0, $s0
+	move $v1, $s1
+	b md_over
+	md_err:
+	li $v0, -1
+	md_over:
 	################save s registers
+
+
+
 
 	jr $ra
 
@@ -294,3 +351,9 @@ compute_check_digit:
 ############### DO NOT CREATE A .data SECTION! ######################
 ##### ANY LINES BEGINNING .data WILL BE DELETED DURING GRADING! #####
 #####################################################################
+
+
+
+
+
+#TODO on
