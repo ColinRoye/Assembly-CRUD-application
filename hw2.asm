@@ -233,11 +233,11 @@ most_damaged:
 
 	move $s6, $a1
 
-
+	###check params
 
 	loop_repairs:
 	lw $s1, 0($a1) # addr to car
-
+	lw $s1, 0($s1)
 
 	lh $s2, 8($a1)
 
@@ -255,6 +255,7 @@ most_damaged:
 	###### j
 	ble $s5, $s3, skip_greatest_lrp
 	move $s3, $s5
+	move $s4, $t0
 	skip_greatest_lrp:
 	addiu $s7, $s7, 1
 	beq $s7, $a3 loop_repairs_over
@@ -273,12 +274,52 @@ most_damaged:
 
 	b loop_repairs
 	loop_repairs_over:
+
+
+	li $s0, 0
+	#load vin
+	move $s2, $s4
+	loop_cars:
+	bgt $s0, $a2, md_err
+	lw $s4, 0($a0)
+ 	# addiu $sp, $sp, -20
+	# sw $a0, 0($sp)
+	# sw $a1, 4($sp)
+	# sw $s0, 8($sp)
+	# sw $s2, 12($sp)
+	# sw $s3, 16($sp)
+	# sw $ra, 20($sp)
+	# move $a0, $s4
+	# move $a1, $s2
+	# jal strcmp
+	# lw $a0, 0($sp)
+	# lw $a1, 4($sp)
+	# lw $s0, 8($sp)
+	# lw $s2, 12($sp)
+	# lw $s3, 16($sp)
+	# lw $ra, 20($sp)
+	# addiu $sp, $sp, 20
+ 	# beqz $v0, loop_cars_over
+	beq $s2, $s4, loop_cars_over
+ 	addiu $s0, $s0, 1
+	addiu $a0, $a0 0x10
+	b loop_cars
+	loop_cars_over:
+
+
+		move $v0, $s3
+		move $v1, $s0
+
+
+
 	b md_over
 	md_err:
 	li $v0, -1
+	li $v1, -1
 	md_over:
-	move $v0, $s3
-	move $v1, $s4
+
+
+
 
 
 	lw $s0, 0($sp)

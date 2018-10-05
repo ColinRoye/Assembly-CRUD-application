@@ -13,8 +13,8 @@ li $v0, 4
 syscall
 la $a0, all_cars
 la $a1, all_repairs
-li $a2, 6
-li $a3, 10
+li $a2, 4
+li $a3, 4
 jal most_damaged
 move $a0, $v0
 li $v0, 1
