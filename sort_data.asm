@@ -50,7 +50,7 @@ all_cars:
 car_00: .word vin_00
 car_00_make_addr: .word make_A
 car_00_model_addr: .word model_A
-car_00_year: .byte 225, 7
+car_00_year: .byte 226, 7
 car_00_features: .byte 8
 .byte 0
 
@@ -218,5 +218,3 @@ sorted_all_cars:
 .byte 227, 7
 .byte 13
 .byte 0
-
-

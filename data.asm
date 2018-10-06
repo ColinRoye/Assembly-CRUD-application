@@ -96,12 +96,12 @@ repair_01_cost: .byte 35, 0
 
 repair_02_car: .word car_02
 repair_02_desc_addr: .word repair_desc_H
-repair_02_cost: .byte 224, 0
+repair_02_cost: .byte 52, 0
 .byte 0, 0
 
 repair_03_car: .word car_00
 repair_03_desc_addr: .word repair_desc_C
-repair_03_cost: .byte 225, 0
+repair_03_cost: .byte 64, 0
 .byte 0, 0
 
 repair_04_car: .word car_02

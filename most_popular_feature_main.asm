@@ -13,7 +13,7 @@ li $v0, 4
 syscall
 la $a0, all_cars
 li $a1, 6
-li $a2, 12
+li $a2, 0
 jal most_popular_feature
 move $a0, $v0
 li $v0, 1

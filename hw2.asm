@@ -202,6 +202,8 @@ insert_car:
 	ic_err:
 	li $v0, -1
 	ic_over:
+
+
 	lw $s0, 0($sp)
 	lw $s1,4($sp)
 	lw $s2, 8($sp)
@@ -335,21 +337,247 @@ most_damaged:
 ### Part VI ###
 sort:
 ################save s registers
+addiu $sp, $sp, -24
+sw $s0, 0($sp)
+sw $s1, 4($sp)
+sw $s2, 8($sp)
+sw $s5, 12($sp)
+sw $a0, 16($sp)
+sw $a1, 20($sp)
 
-	li $v0, -200
-	li $v1, -200
-	################save s registers
+	li $s5, 0 #bool
+
+	loop_sort:
+	bnez $s5, loop_sort_over
+	li $s5, 1 #bool
+
+	li $s0, 1 #iterator
+
+		li $s0, 0 #iterator
+		loop_sort_odd:
+		bgt $s0, $a1, loop_sort_odd_over
+		#load i
+		#load i+1
+		li $s1, 0x10
+		mul $s1, $s1, $s0
+		addu $s1, $s1, $a0
+		addiu $s2, $s1, 0x10
+
+		#years
+		lh $t1, 12($s1)
+		lh $t2, 12($s2)
+
+		#check condition
+		ble $t1, $t2,	check_gt_odd_over
+		## if true swap
+
+
+		addiu $sp, $sp, -40
+		sw $s0, 16($sp)
+		sw $s1, 20($sp)
+		sw $s2, 24($sp)
+		sw $a0, 28($sp)
+		sw $a1, 32($sp)
+		sw $ra, 36($sp)
+
+		move $a0, $s1
+		move $a1, $sp
+		li $a2, 0x10
+
+		jal memcpy
+		lw $s0, 16($sp)
+		lw $s1, 20($sp)
+		lw $s2, 24($sp)
+		lw $a0, 28($sp)
+		lw $a1, 32($sp)
+		lw $ra, 36($sp)
+
+		move $a0, $s2
+		move $a1, $s1
+		li $a2, 0x10
+
+		jal memcpy
+		lw $s0, 16($sp)
+		lw $s1, 20($sp)
+		lw $s2, 24($sp)
+		lw $a0, 28($sp)
+		lw $a1, 32($sp)
+		lw $ra, 36($sp)
+
+
+		move $a0, $sp
+		move $a1, $s2
+		li $a2, 0x10
+
+		jal memcpy
+		lw $s0, 16($sp)
+		lw $s1, 20($sp)
+		lw $s2, 24($sp)
+		lw $a0, 28($sp)
+		lw $a1, 32($sp)
+		lw $ra, 36($sp)
+		addiu $sp, $sp, 40
+
+		li $s5, 0
+		check_gt_odd_over:
+		#add 2
+		addiu $s0, $s0, 2
+		b loop_sort_even
+		loop_sort_odd_over:
+
+#############################even
+
+	li $s0, 0 #iterator
+	loop_sort_even:
+	bgt $s0, $a1, loop_sort_even_over
+	#load i
+	#load i+1
+	li $s1, 0x10
+	mul $s1, $s1, $s0
+	addu $s1, $s1, $a0
+	addiu $s2, $s1, 0x10
+
+	#years
+	lh $t1, 12($s1)
+	lh $t2, 12($s2)
+	nop
+	#check condition
+	ble $t1, $t2,	check_gt_even_over
+	## if true swap
+
+
+	addiu $sp, $sp, -40
+	sw $s0, 16($sp)
+	sw $s1, 20($sp)
+	sw $s2, 24($sp)
+	sw $a0, 28($sp)
+	sw $a1, 32($sp)
+	sw $ra, 36($sp)
+
+	move $a0, $s1
+	move $a1, $sp
+	li $a2, 0x10
+
+	jal memcpy
+	lw $s0, 16($sp)
+	lw $s1, 20($sp)
+	lw $s2, 24($sp)
+	lw $a0, 28($sp)
+	lw $a1, 32($sp)
+	lw $ra, 36($sp)
+
+	move $a0, $s2
+	move $a1, $s1
+	li $a2, 0x10
+
+	jal memcpy
+	lw $s0, 16($sp)
+	lw $s1, 20($sp)
+	lw $s2, 24($sp)
+	lw $a0, 28($sp)
+	lw $a1, 32($sp)
+	lw $ra, 36($sp)
+
+
+	move $a0, $sp
+	move $a1, $s2
+	li $a2, 0x10
+
+	jal memcpy
+	lw $s0, 16($sp)
+	lw $s1, 20($sp)
+	lw $s2, 24($sp)
+	lw $a0, 28($sp)
+	lw $a1, 32($sp)
+	lw $ra, 36($sp)
+	addiu $sp, $sp, 40
+
+	li $s5, 0
+	check_gt_even_over:
+	#add 2
+	addiu $s0, $s0, 2
+	b loop_sort_even
+	loop_sort_even_over:
+
+	b loop_sort
+	loop_sort_over:
+	li $v0, 0
+	b sort_over
+	sort_err:
+	li $v0, -1
+	sort_over:
+
+	sw $s0, 0($sp)
+	sw $s1, 4($sp)
+	sw $s2, 8($sp)
+	sw $s5, 12($sp)
+	sw $a0, 16($sp)
+	sw $a1, 20($sp)
+	addiu $sp, $sp, 24
+
 
 	jr $ra
 
 
 ### Part VII ###
-most_popular_feature:
-################save s registers
+	most_popular_feature:
+	addiu $sp, $sp, -8
+	sw $s0, 0($sp)
+	sw $s1,4($sp)
 
-	li $v0, -200
-	li $v1, -200
-################save s registers
+	blez $a1, mp_err
+	blez $a2, mp_err
+	li $t4, 0xF
+	bgt $a2, $t4
+
+	li $s0, 0 #iterator
+	li $t3, 0 #largest count
+	li $t4, 0
+	loop_features:
+	li $t9, 4
+	beq $s0, $t9, loop_features_over
+	move $s1, $a2
+	srlv $s1, $s1, $s0
+	andi $s1, $s1 0x00000001
+	sllv $s1, $s1, $s0
+
+	beqz $s1, continue_loop_features
+
+	li $t0, 0
+	li $t5, 0 #running count
+	loop_features_cars:
+	beq $t0, $a1, loop_features_cars_over
+
+	li $t1, 0x10
+	mul $t1, $t1, $t0
+	addu $t1, $t1, $a0
+	lb $t1, 14($t1)
+
+	and $t1, $t1, $s1
+
+	addiu $t0, $t0, 1
+	beqz $t1, loop_features_cars
+	addiu $t5, $t5, 1
+	b loop_features_cars
+	loop_features_cars_over:
+	blt $t5, $t3, continue_loop_features
+	move $t3, $t5
+	move $t4, $s1
+	continue_loop_features:
+	addiu $s0, $s0, 1
+	b loop_features
+	loop_features_over:
+	move $v0, $t4
+	blez $v0, mp_err
+
+	b mp_over
+	mp_err:
+	li $v0, -1
+	mp_over:
+
+	lw $s0, 0($sp)
+	lw $s1,4($sp)
+	addiu $sp, $sp, 8
 
 	jr $ra
 
