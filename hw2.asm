@@ -585,9 +585,15 @@ sw $a1, 20($sp)
 ### Optional function: not required for the assignment ###
 transliterate:
 ################save s registers
+	addiu $sp, $sp, -4
+	sw $ra, 0($sp)
+	jal index_of
+	lw $ra, 0($sp)
+	addiu $sp, $sp, 4
 
-	li $v0, -200
-	li $v1, -200
+	li $t0, 10
+	div $v0, $t0
+	mfhi $v0
 	################save s registers
 
 	jr $ra
@@ -595,10 +601,9 @@ transliterate:
 
 ### Optional function: not required for the assignment ###
 char_at:
-################save s registers
-
-	li $v0, -200
-	li $v1, -200
+	################save s registers
+	addu $a0, $a0, $a1
+	lbu $v0, 0($a0)
 	################save s registers
 
 	jr $ra
@@ -607,9 +612,18 @@ char_at:
 ### Optional function: not required for the assignment ###
 index_of:
 ################save s registers
+	li $t1, 0
+	loop_ind_of:
+	lbu $t0, 0($a1)
+	beq $t0, $a0, loop_ind_of_over
 
-	li $v0, -200
-	li $v1, -200
+
+	addiu $t1, $t1, 1
+	addiu $a1, $a1, 1
+	b loop_ind_of
+	loop_ind_of_over:
+	move $v0, $t1
+
 	################save s registers
 
 	jr $ra
@@ -618,9 +632,12 @@ index_of:
 ### Part VIII ###
 compute_check_digit:
 ################save s registers
+	loop_cds:
 
-	li $v0, -200
-	li $v1, -200
+
+
+	blt $t0, 
+
 	################save s registers
 
 	jr $ra
