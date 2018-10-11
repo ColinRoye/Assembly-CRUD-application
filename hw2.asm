@@ -364,8 +364,8 @@ sw $a1, 20($sp)
 		addiu $s2, $s1, 0x10
 
 		#years
-		lh $t1, 12($s1)
-		lh $t2, 12($s2)
+		lh $t1, 12($s1)##S
+		lh $t2, 12($s2)##S
 
 		#check condition
 		ble $t1, $t2,	check_gt_odd_over
@@ -421,7 +421,7 @@ sw $a1, 20($sp)
 		li $s5, 0
 		check_gt_odd_over:
 		#add 2
-		addiu $s0, $s0, 2
+		addiu $s0, $s0, 1
 		b loop_sort_even
 		loop_sort_odd_over:
 
@@ -495,7 +495,7 @@ sw $a1, 20($sp)
 	li $s5, 0
 	check_gt_even_over:
 	#add 2
-	addiu $s0, $s0, 2
+	addiu $s0, $s0, 1
 	b loop_sort_even
 	loop_sort_even_over:
 
