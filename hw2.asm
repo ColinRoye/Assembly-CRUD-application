@@ -528,7 +528,7 @@ sw $a1, 20($sp)
 	blez $a1, mp_err
 	blez $a2, mp_err
 	li $t4, 0xF
-	bgt $a2, $t4
+	bgt $a2, $t4, mp_err #possibly wrong
 
 	li $s0, 0 #iterator
 	li $t3, 0 #largest count
@@ -632,13 +632,87 @@ index_of:
 ### Part VIII ###
 compute_check_digit:
 ################save s registers
+	addiu $sp, $sp, -20
+	sw $ra, 0($sp)
+	sw $s0, 4($sp)
+	sw $s1, 8($sp)
+	sw $s4, 12($sp)
+	sw $s5, 16($sp)
+
+	li $s0, 0, #iterator
+	li $s1, 0 #sum
+	li $s4, 17 #const
+
 	loop_cds:
 
+	addiu $sp, $sp, -36
+	sw $ra, 0($sp)
+	sw $s0, 4($sp)
+	sw $s1, 8($sp)
+	sw $s4, 12($sp)
+	sw $a0, 16($sp)
+	sw $a1, 20($sp)
+	sw $a2, 24($sp)
+	sw $a3, 28($sp)
+
+	#char at i
+	lw $a1, 4($sp)#$s0
+	jal char_at
 
 
-	blt $t0, 
+	move $a0, $v0
+	lw $a1, 28($sp)
+	jal transliterate
 
-	################save s registers
+	sw $v0, 32($sp)
+
+	lw $a0, 24($sp) #$a2 weights
+	lw $a1, 4($sp)#$s0
+	jal char_at
+
+
+	lw $a1, 20($sp) #a1 map
+	move $a0, $v0
+	jal index_of
+
+	lw $s5, 32($sp)
+
+	mul $v0, $v0, $s5
+
+
+	lw $ra, 0($sp)
+	lw $s0, 4($sp)
+	lw $s1, 8($sp)
+	lw $s4, 12($sp)
+	lw $a0, 16($sp)
+	lw $a1, 20($sp)
+	lw $a2, 24($sp)
+	lw $a3, 28($sp)
+	addiu $sp, $sp, 36
+
+
+
+
+
+
+	addu $s1, $s1, $v0
+
+	addiu $s0, $s0, 1
+	bge $s0, $s4, loop_cds_over
+	b loop_cds
+	loop_cds_over:
+
+	li $t0, 11
+	div $s1, $t0
+
+	mfhi $v0
+
+	lw $ra, 0($sp)
+	lw $s0, 4($sp)
+	lw $s1, 8($sp)
+	lw $s4, 12($sp)
+	lw $s5, 16($sp)
+	addiu $sp, $sp, 20
 
 	jr $ra
 

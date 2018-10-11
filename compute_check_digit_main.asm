@@ -1,4 +1,4 @@
-.include "hw2.asm"
+
 
 .data
 nl: .asciiz "\n"
@@ -18,7 +18,7 @@ main:
 la $a0, compute_check_digit_output
 li $v0, 4
 syscall
-la $a0, vin_test1
+la $a0, vin_test5
 la $a1, map
 la $a2, weights
 la $a3, transliterate_str
@@ -31,3 +31,4 @@ li $v0, 4
 syscall
 li $v0, 10
 syscall
+.include "hw2.asm"
