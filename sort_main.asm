@@ -13,7 +13,7 @@ main:
   syscall
 
   la $a0, all_cars
-  li $a1, 12
+  li $a1, 1
   li $s0, 0
 
   addiu $sp, $sp, -8
@@ -29,7 +29,7 @@ main:
 
   lw $a0, 0($sp)
   lw $a1, 4($sp)
-  jal print_cars
+  #jal print_cars
 
 
   addiu $sp, $sp, 8
@@ -37,9 +37,9 @@ main:
 
 
 
-#   move $a0, $v0
-#   li $v0, 1
-# syscall
+  move $a0, $v0
+  li $v0, 1
+syscall
 la $a0, nl
 li $v0, 4
 syscall

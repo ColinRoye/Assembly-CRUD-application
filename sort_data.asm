@@ -47,89 +47,90 @@ repair_desc_I: .asciiz "replace spare tire"
 # Unsorted data
 .align 2
 all_cars:
-car_00: .word vin_00
-car_00_make_addr: .word make_A
-car_00_model_addr: .word model_A
-car_00_year: .byte 226, 7
-car_00_features: .byte 8
-.byte 0
-
-car_01: .word vin_01
-car_01_make_addr: .word make_D
-car_01_model_addr: .word model_B
-car_01_year: .byte 226, 7
-car_01_features: .byte 8
-.byte 0
-
-car_02: .word vin_02
-car_02_make_addr: .word make_A
-car_02_model_addr: .word model_C
-car_02_year: .byte 225, 7
-car_02_features: .byte 12
-.byte 0
-
-car_03: .word vin_03
-car_03_make_addr: .word make_E
-car_03_model_addr: .word model_D
-car_03_year: .byte 226, 7
-car_03_features: .byte 10
-.byte 0
-
-car_04: .word vin_04
-car_04_make_addr: .word make_A
-car_04_model_addr: .word model_E
-car_04_year: .byte 227, 7
-car_04_features: .byte 5
-.byte 0
-
-car_05: .word vin_05
-car_05_make_addr: .word make_C
-car_05_model_addr: .word model_F
-car_05_year: .byte 227, 7
-car_05_features: .byte 10
-.byte 0
-
-car_06: .word vin_06
-car_06_make_addr: .word make_B
-car_06_model_addr: .word model_G
-car_06_year: .byte 227, 7
-car_06_features: .byte 0
-.byte 0
-
+# car_00: .word vin_00
+# car_00_make_addr: .word make_A
+# car_00_model_addr: .word model_A
+# car_00_year: .byte , 7
+# car_00_features: .byte 8
+# .byte 0
+#
+# car_01: .word vin_01
+# car_01_make_addr: .word make_D
+# car_01_model_addr: .word model_B
+# car_01_year: .byte , 7
+# car_01_features: .byte 8
+# .byte 0
+#
+# car_02: .word vin_02
+# car_02_make_addr: .word make_A
+# car_02_model_addr: .word model_C
+# car_02_year: .byte , 7
+# car_02_features: .byte 12
+# .byte 0
+#
+# car_03: .word vin_03
+# car_03_make_addr: .word make_E
+# car_03_model_addr: .word model_D
+# car_03_year: .byte , 7
+# car_03_features: .byte 10
+# .byte 0
+#
+# car_04: .word vin_04
+# car_04_make_addr: .word make_A
+# car_04_model_addr: .word model_E
+# car_04_year: .byte , 7
+# car_04_features: .byte 5
+# .byte 0
+#
+# car_05: .word vin_05
+# car_05_make_addr: .word make_C
+# car_05_model_addr: .word model_F
+# car_05_year: .byte , 7
+# car_05_features: .byte 10
+# .byte 0
+#
+# car_06: .word vin_06
+# car_06_make_addr: .word make_B
+# car_06_model_addr: .word model_G
+# car_06_year: .byte , 7
+# car_06_features: .byte 0
+# .byte 0
+#
 car_07: .word vin_07
 car_07_make_addr: .word make_A
 car_07_model_addr: .word model_H
-car_07_year: .byte 225, 7
+car_07_year: .byte 1, 0
 car_07_features: .byte 12
 .byte 0
 
 car_08: .word vin_08
 car_08_make_addr: .word make_A
 car_08_model_addr: .word model_I
-car_08_year: .byte 227, 7
+car_08_year: .byte 0, 0
 car_08_features: .byte 10
 .byte 0
 
 car_09: .word vin_09
 car_09_make_addr: .word make_A
 car_09_model_addr: .word model_J
-car_09_year: .byte 226, 7
+car_09_year: .byte 0, 0
 car_09_features: .byte 1
 .byte 0
 
 car_10: .word vin_10
 car_10_make_addr: .word make_B
 car_10_model_addr: .word model_K
-car_10_year: .byte 226, 7
+car_10_year: .byte 0, 0
 car_10_features: .byte 4
 .byte 0
 
 car_11: .word vin_11
 car_11_make_addr: .word make_C
 car_11_model_addr: .word model_L
-car_11_year: .byte 227, 7
+car_11_year: .byte 1, 0
 car_11_features: .byte 13
 .byte 0
+
 
 
 # Expected sorted array

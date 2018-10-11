@@ -347,15 +347,18 @@ sw $a1, 20($sp)
 
 	li $s5, 0 #bool
 
+	blez $a1, sort_err
+
+
 	loop_sort:
 	bnez $s5, loop_sort_over
 	li $s5, 1 #bool
 
 	li $s0, 1 #iterator
 
-		li $s0, 0 #iterator
 		loop_sort_odd:
-		bgt $s0, $a1, loop_sort_odd_over
+		addiu $t0, $s0, 1
+		bge $t0, $a1, loop_sort_odd_over
 		#load i
 		#load i+1
 		li $s1, 0x10
@@ -421,15 +424,16 @@ sw $a1, 20($sp)
 		li $s5, 0
 		check_gt_odd_over:
 		#add 2
-		addiu $s0, $s0, 1
-		b loop_sort_even
+		addiu $s0, $s0, 2
+		b loop_sort_odd
 		loop_sort_odd_over:
 
 #############################even
 
 	li $s0, 0 #iterator
 	loop_sort_even:
-	bgt $s0, $a1, loop_sort_even_over
+	addiu $t0, $s0, 1
+	bge $t0, $a1, loop_sort_even_over
 	#load i
 	#load i+1
 	li $s1, 0x10
@@ -495,7 +499,7 @@ sw $a1, 20($sp)
 	li $s5, 0
 	check_gt_even_over:
 	#add 2
-	addiu $s0, $s0, 1
+	addiu $s0, $s0, 2
 	b loop_sort_even
 	loop_sort_even_over:
 
