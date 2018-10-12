@@ -1,5 +1,5 @@
 .include "data.asm"
-.include "hw2.asm"
+
 
 .data
 nl: .asciiz "\n"
@@ -30,3 +30,5 @@ li $v0, 4
 syscall
 li $v0, 10
 syscall
+
+.include "hw2.asm"

@@ -300,8 +300,8 @@ most_damaged:
 	loop_cars_over:
 
 
-		move $v0, $s3
-		move $v1, $s0
+		move $v1, $s3
+		move $v0, $s0
 
 
 
