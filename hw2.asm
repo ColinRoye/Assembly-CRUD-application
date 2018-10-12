@@ -13,11 +13,12 @@
 
 ### Part I ###
 index_of_car:
-	addiu $sp, $sp, -4
+	addiu $sp, $sp, -8
 	sw $s0, 0($sp)
+	sw $s1, 4($sp)
 	#for i less then num cars
 	#save registers
-
+	move $t6, $a2
 	li $t0, 0x10
 	mul $a2, $a2, $t0
 
@@ -25,7 +26,7 @@ index_of_car:
 
 	li $s0, 0 #iterator
 	loop_ioc:
-	beq $s0, $a1, ioc_not_found #branch if equal length
+	bge $s0, $a1, ioc_not_found #branch if equal length
 
 	lh $s1, 12($a0)
 
@@ -38,6 +39,7 @@ index_of_car:
 	b loop_ioc
 	ioc_found:
 	move $v0, $s0
+	addu $v0, $v0, $t6
 
 	b ioc_finished
 	ioc_not_found:
@@ -45,8 +47,11 @@ index_of_car:
 
 
 	ioc_finished:
+
+
+	lw $s1, 4($sp)
 	lw $s0, 0($sp)
-	addiu $sp, $sp, -4
+	addiu $sp, $sp, -8
 	jr $ra
 
 
@@ -136,6 +141,7 @@ memcpy:
 
 
 ### Part IV ###
+#check
 insert_car:
 ################save s registers
 
@@ -166,8 +172,8 @@ insert_car:
 	sw $a3, 12($sp)
 	sw $s0, 16($sp)
 	sw $s1, 20($sp)
-	sw $s2, 20($sp)
-	sw $ra, 24($sp)
+	sw $s2, 24($sp)
+	sw $ra, 28($sp)
 	li $a2, 0x10
 	jal memcpy
 	lw $a0, 0($sp)
@@ -176,11 +182,11 @@ insert_car:
 	lw $a3, 12($sp)
 	lw $s0, 16($sp)
 	lw $s1, 20($sp)
-	lw $s2, 20($sp)
-	lw $ra, 24($sp)
+	lw $s2, 24($sp)#originally loaded 20 ###TEST
+	lw $ra, 28($sp)
 	addiu $sp, $sp, 32
 
-	beq $s2, $s1, loop_ic_over #ind = previously moved ind
+	ble $s2, $s1, loop_ic_over #ind = previously moved ind ##Originally eq
 	addiu $s2, $s2, -1 #len
 
 	addiu $a1, $a1, -0x10 #dest
@@ -214,13 +220,15 @@ insert_car:
 
 ### Part V ###
 most_damaged:
-	addiu $sp, $sp, 24
+	addiu $sp, $sp, -32
 	sw $s0, 0($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
 	sw $s4, 12($sp)
 	sw $s5, 16($sp)
 	sw $s6, 20($sp)
+	sw $s3, 24($sp)
+	sw $s7, 28($sp)
 
 	li $s0,  0 # i
 	li $s7,  0 #j
@@ -284,24 +292,6 @@ most_damaged:
 	loop_cars:
 	bgt $s0, $a2, md_err
 	lw $s4, 0($a0)
- 	# addiu $sp, $sp, -20
-	# sw $a0, 0($sp)
-	# sw $a1, 4($sp)
-	# sw $s0, 8($sp)
-	# sw $s2, 12($sp)
-	# sw $s3, 16($sp)
-	# sw $ra, 20($sp)
-	# move $a0, $s4
-	# move $a1, $s2
-	# jal strcmp
-	# lw $a0, 0($sp)
-	# lw $a1, 4($sp)
-	# lw $s0, 8($sp)
-	# lw $s2, 12($sp)
-	# lw $s3, 16($sp)
-	# lw $ra, 20($sp)
-	# addiu $sp, $sp, 20
- 	# beqz $v0, loop_cars_over
 	beq $s2, $s4, loop_cars_over
  	addiu $s0, $s0, 1
 	addiu $a0, $a0 0x10
@@ -330,7 +320,9 @@ most_damaged:
 	lw $s4, 12($sp)
 	lw $s5, 16($sp)
 	lw $s6, 20($sp)
-	addiu $sp, $sp, 24
+	lw $s3, 24($sp)
+	lw $s7, 28($sp)
+	addiu $sp, $sp, 32
 	jr $ra
 
 
@@ -515,8 +507,6 @@ sw $a1, 20($sp)
 	sw $s1, 4($sp)
 	sw $s2, 8($sp)
 	sw $s5, 12($sp)
-	sw $a0, 16($sp)
-	sw $a1, 20($sp)
 	addiu $sp, $sp, 24
 
 
@@ -728,9 +718,3 @@ compute_check_digit:
 ############### DO NOT CREATE A .data SECTION! ######################
 ##### ANY LINES BEGINNING .data WILL BE DELETED DURING GRADING! #####
 #####################################################################
-
-
-
-
-
-#TODO on
