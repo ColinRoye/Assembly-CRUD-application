@@ -86,22 +86,22 @@ car_05_features: .byte 10
 all_repairs:
 repair_00_car: .word car_00
 repair_00_desc_addr: .word repair_desc_A
-repair_00_cost: .byte 2, 0
+repair_00_cost: .byte 201, 0
 .byte 0, 0
 
 repair_01_car: .word car_04
 repair_01_desc_addr: .word repair_desc_G
-repair_01_cost: .byte 3, 0
+repair_01_cost: .byte 100, 0
 .byte 0, 0
 
 repair_02_car: .word car_02
 repair_02_desc_addr: .word repair_desc_H
-repair_02_cost: .byte 0, 0
+repair_02_cost: .byte 100, 0
 .byte 0, 0
 
-repair_03_car: .word car_00
+repair_03_car: .word car_02
 repair_03_desc_addr: .word repair_desc_C
-repair_03_cost: .byte 0, 0
+repair_03_cost: .byte 102, 0
 .byte 0, 0
 
 repair_04_car: .word car_02

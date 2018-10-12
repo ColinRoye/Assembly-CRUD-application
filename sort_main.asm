@@ -1,5 +1,5 @@
 .include "sort_data.asm"
-.include "hw2.asm"
+
 
 .data
 nl: .asciiz "\n"
@@ -13,7 +13,7 @@ main:
   syscall
 
   la $a0, all_cars
-  li $a1, 1
+  li $a1, 10
   li $s0, 0
 
   addiu $sp, $sp, -8
@@ -21,7 +21,7 @@ main:
   sw $a1, 4($sp)
 
 
-  #jal print_cars
+  jal print_cars
 
   lw $a0, 0($sp)
   lw $a1, 4($sp)
@@ -29,7 +29,7 @@ main:
 
   lw $a0, 0($sp)
   lw $a1, 4($sp)
-  #jal print_cars
+  jal print_cars
 
 
   addiu $sp, $sp, 8
@@ -86,7 +86,7 @@ print_cars:
   lw $a0, 0($sp)
   lw $a1, 4($sp)
 
-  lh $a0, 12($s1)
+  lb $a0, 0($s1)
   li $v0, 1
   syscall
 
@@ -111,3 +111,4 @@ print_cars:
   addiu $sp, $sp, -8
 
   jr $ra
+.include "hw2.asm"

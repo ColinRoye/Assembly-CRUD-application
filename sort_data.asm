@@ -1,38 +1,38 @@
 .data
-vin_00: .asciiz "JTDKN3DU0D5614628"
-vin_01: .asciiz "2FMDK4JC5DBC37904"
-vin_02: .asciiz "1B4HR28N51F502695"
-vin_03: .asciiz "1G1AK15F967719757"
-vin_04: .asciiz "1HGEM1159YL037618"
-vin_05: .asciiz "5N1AR2MM2EC648945"
-vin_06: .asciiz "1NKDX90X1WR777109"
-vin_07: .asciiz "3FAHP0HA5CR371712"
-vin_08: .asciiz "5J6TF2H55AL005521"
-vin_09: .asciiz "1G4GC5G34FF231147"
-vin_10: .asciiz "1B7HF16Z0XS322729"
-vin_11: .asciiz "1G1PC5SHXC7276485"
+vin_00: .byte 100,1
+vin_01: .asciiz "1"
+vin_02: .asciiz "2"
+vin_03: .asciiz "3"
+vin_04: .asciiz "4"
+vin_05: .asciiz "5"
+vin_06: .asciiz "6"
+vin_07: .asciiz "7"
+vin_08: .asciiz "8"
+vin_09: .asciiz "9"
+vin_10: .asciiz "10"
+vin_11: .asciiz "11"
 
-make_A: .asciiz "Fjord"
-make_B: .asciiz "Honder"
-make_C: .asciiz "Toyoter"
-make_D: .asciiz "Hunday"
-make_E: .asciiz "Mersaydeez"
+make_A: .asciiz "A"
+make_B: .asciiz "B"
+make_C: .asciiz "C"
+make_D: .asciiz "D"
+make_E: .asciiz "E"
 
-model_A: .asciiz "Wolfie-Z"
-model_B: .asciiz "X27"
-model_C: .asciiz "Escapade"
-model_D: .asciiz "Road Hog"
-model_E: .asciiz "Elantris"
-model_F: .asciiz "Raoden"
-model_G: .asciiz "Sazed"
-model_H: .asciiz "Scadrial"
-model_I: .asciiz "Metalborn"
-model_J: .asciiz "Terris Roadster"
-model_K: .asciiz "Allomancer"
-model_L: .asciiz "Stormlight"
-model_M: .asciiz "Dalinar"
-model_N: .asciiz "Shallan"
-model_O: .asciiz "Elendel Highliner"
+model_A: .asciiz "A"
+model_B: .asciiz "B"
+model_C: .asciiz "C"
+model_D: .asciiz "D"
+model_E: .asciiz "E"
+model_F: .asciiz "F"
+model_G: .asciiz "G"
+model_H: .asciiz "H"
+model_I: .asciiz "I"
+model_J: .asciiz "J"
+model_K: .asciiz "K"
+model_L: .asciiz "L"
+model_M: .asciiz "M"
+model_N: .asciiz "N"
+model_O: .asciiz "O"
 
 repair_desc_A: .asciiz "fix cracked windshield"
 repair_desc_B: .asciiz "rotate tires"
@@ -96,7 +96,7 @@ all_cars:
 # car_06_features: .byte 0
 # .byte 0
 #
-car_07: .word vin_07
+car_07: .word vin_00
 car_07_make_addr: .word make_A
 car_07_model_addr: .word model_H
 car_07_year: .byte 1, 0
@@ -106,28 +106,28 @@ car_07_features: .byte 12
 car_08: .word vin_08
 car_08_make_addr: .word make_A
 car_08_model_addr: .word model_I
-car_08_year: .byte 0, 0
+car_08_year: .byte 2, 0
 car_08_features: .byte 10
 .byte 0
 
 car_09: .word vin_09
 car_09_make_addr: .word make_A
 car_09_model_addr: .word model_J
-car_09_year: .byte 0, 0
+car_09_year: .byte 1, 0
 car_09_features: .byte 1
 .byte 0
 
 car_10: .word vin_10
 car_10_make_addr: .word make_B
 car_10_model_addr: .word model_K
-car_10_year: .byte 0, 0
+car_10_year: .byte 2, 0
 car_10_features: .byte 4
 .byte 0
 
 car_11: .word vin_11
 car_11_make_addr: .word make_C
 car_11_model_addr: .word model_L
-car_11_year: .byte 1, 0
+car_11_year: .byte 229, 7
 car_11_features: .byte 13
 .byte 0
 
