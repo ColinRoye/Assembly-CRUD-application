@@ -43,21 +43,21 @@ all_cars:
 car_00: .word vin_00
 car_00_make_addr: .word make_A
 car_00_model_addr: .word model_A
-car_00_year: .byte 115, 7
+car_00_year: .byte 110, 7
 car_00_features: .byte 8
 .byte 0
 
 car_01: .word vin_01
 car_01_make_addr: .word make_D
 car_01_model_addr: .word model_B
-car_01_year: .byte 225, 7
+car_01_year: .byte 115, 7
 car_01_features: .byte 8
 .byte 0
 
 car_02: .word vin_02
 car_02_make_addr: .word make_A
 car_02_model_addr: .word model_C
-car_02_year: .byte 110, 7
+car_02_year: .byte 225, 7
 car_02_features: .byte 12
 .byte 0
 

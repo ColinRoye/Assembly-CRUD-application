@@ -3,8 +3,8 @@
 .data
 nl: .asciiz "\n"
 strcmp_output: .asciiz "strcmp output: "
-str1: .asciiz "111"
-str2: .asciiz "111"
+str1: .asciiz "Intel"
+str2: .asciiz "pentium"
 
 .text
 .globl main
