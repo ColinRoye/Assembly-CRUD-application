@@ -164,6 +164,7 @@ insert_car:
 
 	loop_ic:
 
+	ble $s2, $s1, loop_ic_over #ind = previously moved ind ##Originally eq
 
 	addiu $sp, $sp, -32
 	sw $a0, 0($sp)
@@ -186,7 +187,6 @@ insert_car:
 	lw $ra, 28($sp)
 	addiu $sp, $sp, 32
 
-	ble $s2, $s1, loop_ic_over #ind = previously moved ind ##Originally eq
 	addiu $s2, $s2, -1 #len
 
 	addiu $a1, $a1, -0x10 #dest
@@ -195,6 +195,7 @@ insert_car:
 	loop_ic_over:
 ######insert_car
 	move $a1, $a0
+	addiu $a1, $a1, 0x10
 	move $a0, $a2
 	addiu $sp, $sp, -4
 	sw $ra, 0($sp)
